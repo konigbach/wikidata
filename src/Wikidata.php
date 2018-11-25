@@ -70,9 +70,7 @@ class Wikidata {
 
         $results = json_decode($response->getBody());
 
-        $data = $this->formatSearchResults($results);
-
-        return $data;
+        return $this->formatSearchResults($results);
     }
 
     /**
