@@ -6,8 +6,6 @@ use Sparql\QueryBuilder;
 use Sparql\QueryExecuter;
 use Exception;
 use GuzzleHttp\Client;
-use Wikidata\Entity;
-use Wikidata\Result;
 
 class Wikidata {
 	
@@ -322,5 +320,13 @@ class Wikidata {
       $string = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $string);
 
       return trim($string, $separator);
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
     }
 }
