@@ -32,20 +32,26 @@ class Wikidata {
      * Format of results
      * @var string
      */
-    public $format = 'json';
+    protected $format = 'json';
 
     /**
      * Language of results
      * @var string
      */
-    public $language;
+    protected $language;
+
+    /**
+     * @var string
+     */
+    protected $uselang;
 
     /**
      * @param string $language
      */
-    public function __construct($language = 'en') 
+    public function __construct($language = 'en', $uselang = 'en')
     {
         $this->language = $language;
+        $this->uselang = $uselang;
     }
 
     /**
@@ -65,6 +71,7 @@ class Wikidata {
                 'format' => $this->format,
                 'language' => $this->language,
                 'search' => $term,
+                'uselang' => $this->uselang
             ]
         ]);
 
@@ -102,9 +109,7 @@ class Wikidata {
 
         $results = $queryExecuter->execute( $queryBuilder->getSPARQL() ); 
 
-        $data = $this->formatSearchByResults($results);
-
-        return $data;
+        return $this->formatSearchByResults($results);
     }
 
     /**
@@ -326,5 +331,13 @@ class Wikidata {
     public function setLanguage($language)
     {
         $this->language = $language;
+    }
+
+    /**
+     * @param string $uselang
+     */
+    public function setUselang($uselang)
+    {
+        $this->uselang = $uselang;
     }
 }
